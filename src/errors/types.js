@@ -19,10 +19,24 @@ const invalidName = (Item = "Nome") => {
     }
 }
 
+const invalidDate = (Item = "") => {
+    return {
+        type: "invalid",
+        message: `Data ${Item} inválida! Não pode ser uma data anterior à atual.`
+    }
+}
+
 const notFound = (resource = "Item") => {
     return {
         type: "notFound",
         message: `${resource} não encontrado!`
+    }
+}
+
+const sameCities = () => {
+    return {
+        type: "conflict",
+        message: `Os id's de origem e destino são iguais!`
     }
 }
 
@@ -44,7 +58,9 @@ const error = {
     conflict,
     invalidId,
     invalidName,
+    invalidDate,
     notFound,
+    sameCities,
     incompleteData,
     joiError
 }

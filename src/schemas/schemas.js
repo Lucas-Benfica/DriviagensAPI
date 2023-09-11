@@ -8,3 +8,9 @@ export const passengersSchema = Joi.object({
 export const citiesSchema = Joi.object({
     name: Joi.string().min(2).max(50).required()
 })
+
+export const flightsSchema = Joi.object({
+    origin: Joi.number().integer().min(1).required(),
+    destination: Joi.number().integer().min(1).required(),
+    date: Joi.string().regex(/^\d{2}-\d{2}-\d{4}$/).required()
+});
