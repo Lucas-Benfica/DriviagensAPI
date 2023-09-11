@@ -1,4 +1,4 @@
-const conflict = (resource  = "Item") => {
+const conflict = (resource = "Item") => {
     return {
         type: "conflict",
         message: `${resource} já existe!`
@@ -41,7 +41,7 @@ const joiError = (message) => {
 };
 
 const error = {
-    conflict, 
+    conflict,
     invalidId,
     invalidName,
     notFound,
