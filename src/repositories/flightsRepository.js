@@ -1,19 +1,24 @@
 import { db } from "../database/databaseConnection.js";
-import { mapObjectToInsertQuery } from "../utils/sqlUtils.js";
 
-async function createFlight(flight){
-
-    const { objectColumns, objectValues, paramsOrder } = mapObjectToInsertQuery(flight);
-
+async function createFlight(origin, destination, date){
     await db.query(`
-        INSERT INTO flights (${objectColumns})
-        VALUES (${paramsOrder});
-    `, [...objectValues]);
-
+        INSERT INTO flights (origin, destination, date)
+        VALUES ($1, $2, TO_DATE($3, 'DD-MM-YYYY'));
+    `, [origin, destination, date]);
 }
 
-const flightRepository = {
-    createFlight
+async function searchFlightById(id){
+
+    const result = await db.query(`
+        SELECT * FROM flights WHERE id=$1;
+    `, [id]);
+
+    return result.rows[0];
 }
 
-export default flightRepository;
+const flightsRepository = {
+    createFlight,
+    searchFlightById
+}
+
+export default flightsRepository;

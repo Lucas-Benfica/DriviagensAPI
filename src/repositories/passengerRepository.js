@@ -11,8 +11,18 @@ async function createPassenger(passenger){
     `, [...objectValues]);
 }
 
+async function searchPassengerById(id){
+
+    const result = await db.query(`
+        SELECT * FROM passengers WHERE id=$1;
+    `, [id]);
+
+    return result.rows[0];
+}
+
 const passengerRepository = {
-    createPassenger
+    createPassenger,
+    searchPassengerById
 }
 
 export default passengerRepository;

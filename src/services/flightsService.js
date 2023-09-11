@@ -1,7 +1,7 @@
 import error from "../errors/types.js";
 import citiesRepository from "../repositories/citiesRepository.js";
 import { isDateValid } from "../utils/sqlUtils.js";
-import flightRepository from "../repositories/flightsRepository.js";
+import flightsRepository from "../repositories/flightsRepository.js";
 
 async function createFlight({origin, destination, date}){
     if( !origin || !destination || !date ) throw error.incompleteData();
@@ -16,7 +16,7 @@ async function createFlight({origin, destination, date}){
 
     if(!isDateValid(date)) throw error.invalidDate();
     
-    return flightRepository.createFlight({origin, destination, date});
+    return flightsRepository.createFlight(origin, destination, date);
 }
 
 const flightsService =  {

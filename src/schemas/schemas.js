@@ -14,3 +14,8 @@ export const flightsSchema = Joi.object({
     destination: Joi.number().integer().min(1).required(),
     date: Joi.string().regex(/^\d{2}-\d{2}-\d{4}$/).required()
 });
+
+export const travelsSchema = Joi.object({
+    passengerId: Joi.number().integer().min(1).required(),
+    flightId: Joi.number().integer().min(1).required()
+});
