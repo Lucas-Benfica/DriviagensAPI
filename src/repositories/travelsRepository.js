@@ -23,10 +23,42 @@ async function alreadyExistsTravel(passengerId, flightId){
     return result.rows[0];
 }
 
+async function searchPassengersTravels(){
+    console.log("SEMNOME")
+    const result = await db.query(`
+        SELECT CONCAT(passengers."firstName", ' ', passengers."lastName") AS passenger, COUNT(travels.id) AS travels
+        FROM passengers
+        LEFT JOIN travels ON passengers.id = travels."passengerId"
+        GROUP BY passengers.id, passengers."firstName", passengers."lastName"
+        ORDER BY travels DESC
+        LIMIT 10;
+    `);
+
+    return result.rows;
+}
+
+async function searchPassengersTravelsByName(name){
+    console.log("COmNOME")
+
+    const result = await db.query(`
+        SELECT CONCAT(passengers."firstName", ' ', passengers."lastName") AS passenger, COUNT(travels.id) AS travels
+        FROM passengers
+        LEFT JOIN travels ON passengers.id = travels."passengerId"
+        WHERE passengers."firstName" ILIKE '%$1%' OR passengers."lastName" ILIKE '%$1%'
+        GROUP BY passengers.id, passengers."firstName", passengers."lastName"
+        ORDER BY travels DESC
+        LIMIT 10;
+    `, [name]);
+
+    return result.rows;
+}
+
 const travelsRepository = {
     createTravel,
     searchTravelById,
-    alreadyExistsTravel
+    alreadyExistsTravel,
+    searchPassengersTravels,
+    searchPassengersTravelsByName
 }
 
 export default travelsRepository;

@@ -7,8 +7,15 @@ async function createTravel(req, res) {
     res.sendStatus(httpStatus.CREATED);
 }
 
+async function searchPassengersTravels(req, res) {
+    const name = req.query.name;
+    const result = await travelsService.searchPassengersTravels(name);
+    return result;
+}
+
 const travelsController = {
-    createTravel
+    createTravel,
+    searchPassengersTravels
 };
 
 export default travelsController;

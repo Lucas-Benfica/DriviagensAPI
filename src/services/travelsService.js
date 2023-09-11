@@ -18,8 +18,14 @@ async function createTravel({passengerId, flightId}){
     return travelsRepository.createTravel(passengerId, flightId);
 }
 
+async function searchPassengersTravels(name){
+    if(name) return await travelsRepository.searchPassengersTravelsByName(name);
+    return await travelsRepository.searchPassengersTravels();
+}
+
 const travelsService =  {
-    createTravel
+    createTravel,
+    searchPassengersTravels
 };
 
 export default travelsService;
