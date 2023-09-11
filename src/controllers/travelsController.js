@@ -10,7 +10,8 @@ async function createTravel(req, res) {
 async function searchPassengersTravels(req, res) {
     const name = req.query.name;
     const result = await travelsService.searchPassengersTravels(name);
-    return result;
+
+    res.send(result);
 }
 
 const travelsController = {
