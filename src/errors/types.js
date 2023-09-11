@@ -26,6 +26,13 @@ const invalidDate = (Item = "") => {
     }
 }
 
+const invalidDate2 = (item) => {
+    return {
+        type: "invalid",
+        message: `Problemas com a ${item}!`
+    }
+}
+
 const notFound = (resource = "Item") => {
     return {
         type: "notFound",
@@ -59,6 +66,7 @@ const error = {
     invalidId,
     invalidName,
     invalidDate,
+    invalidDate2,
     notFound,
     sameCities,
     incompleteData,
